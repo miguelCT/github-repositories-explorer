@@ -2,7 +2,7 @@ import { type FC } from 'react';
 import { useQuery } from 'react-query';
 import { USER_REPOS_QUERY_KEY } from 'utils/constants';
 import { type UserRepo } from 'utils/types';
-import { Box, CircularProgress } from '@mui/material';
+import { Box, CircularProgress, Grid2 as Grid } from '@mui/material';
 import RepoInfo from './RepoInfo';
 
 const reposMock = Array.from({ length: 5 }).map((_, i) => ({
@@ -65,15 +65,13 @@ const UserRepos: FC<UserReposProps> = ({ userName }) => {
     }
 
     return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                gap: 1,
-            }}
-        >
-            {userRepos?.map(repo => <RepoInfo key={repo.repoId} {...repo} />)}
-        </Box>
+        <Grid container spacing={1}>
+            {userRepos?.map(repo => (
+                <Grid size={{ xs: 12, md: 6 }}>
+                    <RepoInfo key={repo.repoId} {...repo} />
+                </Grid>
+            ))}
+        </Grid>
     );
 };
 
