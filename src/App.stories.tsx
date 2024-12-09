@@ -1,6 +1,6 @@
 import { expect, userEvent, within } from '@storybook/test';
 import type { Meta, StoryObj } from '@storybook/react';
-import App from './App';
+import App from './pages/App';
 
 const meta = {
     title: 'Demo/App',
