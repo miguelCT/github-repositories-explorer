@@ -1,53 +1,11 @@
 import { LinearProgress } from '@mui/material';
 import { type FC, useState } from 'react';
-import { useQuery } from 'react-query';
 import { useLocation, useNavigate } from 'react-router';
-import { USERS_QUERY_KEY } from 'utils/constants';
-import { type User } from 'utils/types';
-import UserRepos from '../components/UserRepos';
-import UsersAccordion from '../components/UsersAccordion';
+import UserList from '../components/UserList';
 import UserSearch from '../components/UserSearch';
+import useFetchUsers from '../hooks/useFetchUsers';
 
-const usersMock = [
-    {
-        id: 1234567,
-        username: 'awesomedev',
-    },
-    {
-        id: 7890123,
-        username: 'data_scientist',
-    },
-    {
-        id: 4567890,
-        username: 'js_wizard',
-    },
-    {
-        id: 2345678,
-        username: 'art_lover',
-    },
-    {
-        id: 9012345,
-        username: 'crypto_enthusiast',
-    },
-];
-
-const getUsers = async (searchText?: string) => {
-    // eslint-disable-next-line no-console
-    console.log('searchText', searchText);
-
-    const response = await new Promise<Response>(resolve => {
-        setTimeout(() => {
-            resolve(new Response(JSON.stringify(usersMock)));
-        }, 1000);
-    });
-
-    if (!response.ok) {
-        throw new Error('Network response was not ok');
-    }
-    return response.json() as Promise<User[]>;
-};
-
-const UserList: FC = () => {
+const Users: FC = () => {
     const { search, pathname } = useLocation();
     const searchParams = new URLSearchParams(search);
     const [searchText, setSearchText] = useState(
@@ -64,9 +22,7 @@ const UserList: FC = () => {
         isLoading,
         isError,
         error,
-    } = useQuery([USERS_QUERY_KEY, searchText], () => getUsers(searchText), {
-        enabled: !!searchText,
-    });
+    } = useFetchUsers(searchText);
 
     const isLoadingUsers = isFetching || isLoading;
 
@@ -96,16 +52,13 @@ const UserList: FC = () => {
                     onSearch={setInputSearch}
                 />
             </form>
+
             <p>{searchText && `Showing users for: "${searchText}"`}</p>
             <div>{isLoadingUsers && <LinearProgress />}</div>
-
-            {users?.map(user => (
-                <UsersAccordion key={user.id} userName={user.username}>
-                    <UserRepos userName={user.username} />
-                </UsersAccordion>
-            ))}
+            <p>{!isLoadingUsers && users?.length === 0 && 'No users found'}</p>
+            <UserList users={users ?? []} />
         </>
     );
 };
 
-export default UserList;
+export default Users;
