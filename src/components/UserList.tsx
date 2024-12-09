@@ -3,6 +3,7 @@ import { USERS_QUERY_KEY } from 'utils/constants';
 import { type User } from 'utils/types';
 import { type FC, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
+import UserRepos from './UserRepos';
 
 const usersMock = [
     {
@@ -67,6 +68,7 @@ const UserList: FC = () => {
     const isLoadingUsers = isFetching || isLoading;
 
     if (isError) {
+        // TODO create am Error component
         return <span>Error: {(error as Error).message}</span>;
     }
 
@@ -96,7 +98,12 @@ const UserList: FC = () => {
             <div>{isLoadingUsers && 'Loading users...'}</div>
             <p>{searchText && `Showing users for: "${searchText}"`}</p>
             <ul>
-                {users?.map(user => <li key={user.id}>{user.username}</li>)}
+                {users?.map(user => (
+                    <li key={user.id}>
+                        {user.username}
+                        <UserRepos userName={user.username} />
+                    </li>
+                ))}
             </ul>
         </form>
     );
