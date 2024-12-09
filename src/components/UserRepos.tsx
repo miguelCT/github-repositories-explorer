@@ -2,6 +2,7 @@ import { type FC } from 'react';
 import { useQuery } from 'react-query';
 import { USER_REPOS_QUERY_KEY } from 'utils/constants';
 import { type UserRepo } from 'utils/types';
+import { Box, CircularProgress } from '@mui/material';
 import RepoInfo from './RepoInfo';
 
 const reposMock = Array.from({ length: 5 }).map((_, i) => ({
@@ -49,17 +50,30 @@ const UserRepos: FC<UserReposProps> = ({ userName }) => {
     }
 
     if (isLoadingRepos) {
-        return <span>Loading...</span>;
+        return (
+            <Box
+                sx={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: 1,
+                }}
+            >
+                <CircularProgress size={18} />
+                Loading...
+            </Box>
+        );
     }
 
     return (
-        <ul>
-            {userRepos?.map(repo => (
-                <li key={repo.repoId}>
-                    <RepoInfo {...repo} />
-                </li>
-            ))}
-        </ul>
+        <Box
+            sx={{
+                display: 'flex',
+                flexDirection: 'column',
+                gap: 1,
+            }}
+        >
+            {userRepos?.map(repo => <RepoInfo key={repo.repoId} {...repo} />)}
+        </Box>
     );
 };
 

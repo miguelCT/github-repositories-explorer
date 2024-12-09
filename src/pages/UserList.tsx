@@ -1,9 +1,12 @@
+import { LinearProgress } from '@mui/material';
+import { type FC, useState } from 'react';
 import { useQuery } from 'react-query';
+import { useLocation, useNavigate } from 'react-router';
 import { USERS_QUERY_KEY } from 'utils/constants';
 import { type User } from 'utils/types';
-import { type FC, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router';
-import UserRepos from './UserRepos';
+import UserRepos from '../components/UserRepos';
+import UsersAccordion from '../components/UsersAccordion';
+import UserSearch from '../components/UserSearch';
 
 const usersMock = [
     {
@@ -86,26 +89,22 @@ const UserList: FC = () => {
     };
 
     return (
-        <form onSubmit={submitSearch} autoComplete="off">
-            <input
-                type="text"
-                placeholder="Username"
-                onChange={e => setInputSearch(e.target.value)}
-                value={inputSearch}
-                autoFocus
-            />
-            <button type="submit">Search</button>
-            <div>{isLoadingUsers && 'Loading users...'}</div>
+        <>
+            <form onSubmit={submitSearch} autoComplete="off">
+                <UserSearch
+                    inputSearch={inputSearch}
+                    onSearch={setInputSearch}
+                />
+            </form>
             <p>{searchText && `Showing users for: "${searchText}"`}</p>
-            <ul>
-                {users?.map(user => (
-                    <li key={user.id}>
-                        {user.username}
-                        <UserRepos userName={user.username} />
-                    </li>
-                ))}
-            </ul>
-        </form>
+            <div>{isLoadingUsers && <LinearProgress />}</div>
+
+            {users?.map(user => (
+                <UsersAccordion key={user.id} userName={user.username}>
+                    <UserRepos userName={user.username} />
+                </UsersAccordion>
+            ))}
+        </>
     );
 };
 
