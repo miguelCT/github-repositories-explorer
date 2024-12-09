@@ -1,6 +1,8 @@
-import { Card, CardHeader } from '@mui/material';
+import { Box, Card, CardHeader, Typography } from '@mui/material';
 import { type FC } from 'react';
 import { type UserRepo } from 'utils/types';
+
+import StarIcon from '@mui/icons-material/Star';
 
 const RepoInfo: FC<UserRepo> = ({ description, name, stars }) => {
     return (
@@ -13,7 +15,18 @@ const RepoInfo: FC<UserRepo> = ({ description, name, stars }) => {
             <CardHeader
                 title={name}
                 subheader={description}
-                action={<>Stars: {stars}</>}
+                action={
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            alignItems: 'center',
+                            gap: 0.5,
+                        }}
+                    >
+                        <Typography variant="subtitle2">{stars}</Typography>
+                        <StarIcon fontSize="small" />
+                    </Box>
+                }
                 titleTypographyProps={{ variant: 'h6' }}
                 subheaderTypographyProps={{ variant: 'body2' }}
             />

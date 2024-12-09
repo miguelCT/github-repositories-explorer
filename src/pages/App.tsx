@@ -1,5 +1,5 @@
+import { Container } from '@mui/material';
 import UserList from 'pages/UserList';
-import { Container, Typography } from '@mui/material';
 
 const App = () => {
     return (

@@ -13,7 +13,7 @@ const reposMock = Array.from({ length: 5 }).map((_, i) => ({
     description: `Some description for repo ${i + 1}`,
 })) as UserRepo[];
 
-const getUserRepos = async (userName: string) => {
+const getUserRepos = async (_userName: string) => {
     const response = await new Promise<Response>(resolve => {
         setTimeout(
             () => {

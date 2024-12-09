@@ -2,6 +2,8 @@ import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import { type PropsWithChildren, type FC } from 'react';
 import { type User } from 'utils/types';
 
+import ExpandIcon from '@mui/icons-material/ExpandMore';
+
 type UsersAccordionProps = {
     userName: User['username'];
 };
@@ -23,7 +25,9 @@ const UsersAccordion: FC<PropsWithChildren<UsersAccordionProps>> = ({
                 },
             }}
         >
-            <AccordionSummary>{userName}</AccordionSummary>
+            <AccordionSummary expandIcon={<ExpandIcon />}>
+                {userName}
+            </AccordionSummary>
             <AccordionDetails>{children}</AccordionDetails>
         </Accordion>
     );
