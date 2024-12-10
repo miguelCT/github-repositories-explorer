@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import api from 'utils/api';
 import { USER_REPOS_QUERY_KEY } from 'utils/constants';
 
@@ -11,7 +11,9 @@ export const getUserRepos = async (userName: string) => {
 };
 
 export default function useFetchUserRepos(userName: string) {
-    return useQuery([USER_REPOS_QUERY_KEY, userName], () =>
-        getUserRepos(userName),
-    );
+    return useQuery({
+        queryKey: [USER_REPOS_QUERY_KEY, userName],
+
+        queryFn: () => getUserRepos(userName),
+    });
 }

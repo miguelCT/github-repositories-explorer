@@ -19,9 +19,7 @@ const UserRepos: FC<UserReposProps> = ({ userName }) => {
     const isLoadingRepos = isLoading;
 
     if (isError) {
-        return (
-            <ErrorAlert message={(error as Error).message} onRetry={refetch} />
-        );
+        return <ErrorAlert message={error.message} onRetry={refetch} />;
     }
 
     if (isLoadingRepos) {

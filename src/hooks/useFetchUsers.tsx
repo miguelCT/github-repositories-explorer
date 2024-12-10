@@ -1,4 +1,4 @@
-import { useQuery } from 'react-query';
+import { useQuery } from '@tanstack/react-query';
 import api from 'utils/api';
 import { USERS_QUERY_KEY } from 'utils/constants';
 
@@ -11,7 +11,9 @@ const getUsers = async (searchText = '') => {
     return response.data.items;
 };
 export default function useFetchUsers(searchText: string) {
-    return useQuery([USERS_QUERY_KEY, searchText], () => getUsers(searchText), {
+    return useQuery({
+        queryKey: [USERS_QUERY_KEY, searchText],
+        queryFn: () => getUsers(searchText),
         enabled: !!searchText,
     });
 }

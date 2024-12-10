@@ -9,7 +9,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 
 import './index.css';
 
-import { QueryClientProvider } from 'react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import queryClient from 'utils/queryClient';
 
 import { BrowserRouter } from 'react-router';

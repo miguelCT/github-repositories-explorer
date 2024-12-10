@@ -54,10 +54,7 @@ const Users: FC = () => {
             <div>{isLoadingUsers && <LinearProgress />}</div>
 
             {isError && (
-                <ErrorAlert
-                    message={(error as Error).message}
-                    onRetry={refetch}
-                />
+                <ErrorAlert message={error.message} onRetry={refetch} />
             )}
             <p>{!isLoadingUsers && users?.length === 0 && 'No users found'}</p>
             <UserList users={users ?? []} />
