@@ -1,6 +1,7 @@
 import { LinearProgress } from '@mui/material';
 import { type FC, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
+import ErrorAlert from 'components/ErrorAlert';
 import UserList from '../components/UserList';
 import UserSearch from '../components/UserSearch';
 import useFetchUsers from '../hooks/useFetchUsers';
@@ -22,14 +23,10 @@ const Users: FC = () => {
         isLoading,
         isError,
         error,
+        refetch,
     } = useFetchUsers(searchText);
 
     const isLoadingUsers = isFetching || isLoading;
-
-    if (isError) {
-        // TODO create am Error component
-        return <span>Error: {(error as Error).message}</span>;
-    }
 
     const submitSearch = (event: React.FormEvent) => {
         event.preventDefault();
@@ -55,6 +52,13 @@ const Users: FC = () => {
 
             <p>{searchText && `Showing users for: "${searchText}"`}</p>
             <div>{isLoadingUsers && <LinearProgress />}</div>
+
+            {isError && (
+                <ErrorAlert
+                    message={(error as Error).message}
+                    onRetry={refetch}
+                />
+            )}
             <p>{!isLoadingUsers && users?.length === 0 && 'No users found'}</p>
             <UserList users={users ?? []} />
         </>

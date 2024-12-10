@@ -13,7 +13,5 @@ const getUsers = async (searchText = '') => {
 export default function useFetchUsers(searchText: string) {
     return useQuery([USERS_QUERY_KEY, searchText], () => getUsers(searchText), {
         enabled: !!searchText,
-        // TODO review
-        refetchOnWindowFocus: false,
     });
 }

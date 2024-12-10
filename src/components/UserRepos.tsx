@@ -2,6 +2,7 @@ import { Box, CircularProgress, Grid2 as Grid } from '@mui/material';
 import useFetchUserRepos from 'hooks/useFetchUserRepos';
 import { type FC } from 'react';
 import RepoInfo from './RepoInfo';
+import ErrorAlert from './ErrorAlert';
 
 type UserReposProps = {
     userName: string;
@@ -12,13 +13,15 @@ const UserRepos: FC<UserReposProps> = ({ userName }) => {
         isLoading,
         isError,
         error,
+        refetch,
     } = useFetchUserRepos(userName);
 
     const isLoadingRepos = isLoading;
 
     if (isError) {
-        // TODO create am Error component
-        return <span>Error: {(error as Error).message}</span>;
+        return (
+            <ErrorAlert message={(error as Error).message} onRetry={refetch} />
+        );
     }
 
     if (isLoadingRepos) {
