@@ -1,6 +1,6 @@
 import { type FC } from 'react';
 import { type UserSearchItem } from 'utils/types';
-import UserRepos from './UserRepos';
+import UserRepos from '../features/UserRepos';
 import UsersAccordion from './UsersAccordion';
 
 type UserListProps = {

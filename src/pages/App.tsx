@@ -1,5 +1,5 @@
 import { Container } from '@mui/material';
-import Users from './Users';
+import Users from '../features/Users';
 
 const App = () => {
     return (

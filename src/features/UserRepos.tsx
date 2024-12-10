@@ -1,8 +1,8 @@
 import { Box, CircularProgress, Grid2 as Grid } from '@mui/material';
 import useFetchUserRepos from 'hooks/useFetchUserRepos';
 import { type FC } from 'react';
-import RepoInfo from './RepoInfo';
-import ErrorAlert from './ErrorAlert';
+import RepoInfo from '../components/RepoInfo';
+import ErrorAlert from '../components/ErrorAlert';
 
 type UserReposProps = {
     userName: string;
