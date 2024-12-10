@@ -1,10 +1,17 @@
 import { Box, Card, CardHeader, Typography } from '@mui/material';
 import { type FC } from 'react';
-import { type UserRepo } from 'utils/types';
 
 import StarIcon from '@mui/icons-material/Star';
 
-const RepoInfo: FC<UserRepo> = ({ description, name, stars }) => {
+type RepoInfoProps = {
+    description: string | null;
+    name: string;
+    stars?: number;
+};
+const RepoInfo: FC<RepoInfoProps> = ({ description, name, stars }) => {
+    // Format the number of stars using the runtime locale
+    const starsText =
+        stars !== undefined ? new Intl.NumberFormat().format(stars) : '-';
     return (
         <Card
             variant="outlined"
@@ -23,7 +30,7 @@ const RepoInfo: FC<UserRepo> = ({ description, name, stars }) => {
                             gap: 0.5,
                         }}
                     >
-                        <Typography variant="subtitle2">{stars}</Typography>
+                        <Typography variant="subtitle2">{starsText}</Typography>
                         <StarIcon fontSize="small" />
                     </Box>
                 }

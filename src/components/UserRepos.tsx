@@ -39,8 +39,12 @@ const UserRepos: FC<UserReposProps> = ({ userName }) => {
     return (
         <Grid container spacing={1}>
             {userRepos?.map(repo => (
-                <Grid key={repo.repoId} size={{ xs: 12, md: 6 }}>
-                    <RepoInfo {...repo} />
+                <Grid key={repo.id} size={{ xs: 12, md: 6 }}>
+                    <RepoInfo
+                        name={repo.name}
+                        description={repo.description}
+                        stars={repo.stargazers_count}
+                    />
                 </Grid>
             ))}
         </Grid>

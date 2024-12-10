@@ -1,11 +1,11 @@
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import { type PropsWithChildren, type FC } from 'react';
-import { type User } from 'utils/types';
+import { type UserSearchItem } from 'utils/types';
 
 import ExpandIcon from '@mui/icons-material/ExpandMore';
 
 type UsersAccordionProps = {
-    userName: User['username'];
+    userName: UserSearchItem['login'];
 };
 
 const UsersAccordion: FC<PropsWithChildren<UsersAccordionProps>> = ({

@@ -1,29 +1,13 @@
 import { useQuery } from 'react-query';
+import api from 'utils/api';
 import { USER_REPOS_QUERY_KEY } from 'utils/constants';
-import { type UserRepo } from 'utils/types';
 
-const reposMock = Array.from({ length: 10 }).map((_, i) => ({
-    userId: i + 1,
-    repoId: i + 1,
-    name: `repo-${i + 1}`,
-    stars: i * 10,
-    description: `Some description for repo ${i + 1}`,
-})) as UserRepo[];
-
-export const getUserRepos = async (_userName: string) => {
-    const response = await new Promise<Response>(resolve => {
-        setTimeout(
-            () => {
-                resolve(new Response(JSON.stringify(reposMock)));
-            },
-            Math.floor(Math.random() * (3000 - 1000 + 1)) + 1000,
-        );
+export const getUserRepos = async (userName: string) => {
+    const response = await api.repos.listForUser({
+        username: userName,
     });
 
-    if (!response.ok) {
-        throw new Error('Network response was not ok');
-    }
-    return response.json() as Promise<UserRepo[]>;
+    return response.data;
 };
 
 export default function useFetchUserRepos(userName: string) {
