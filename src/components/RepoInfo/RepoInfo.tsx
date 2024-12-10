@@ -3,11 +3,17 @@ import { type FC } from 'react';
 
 import StarIcon from '@mui/icons-material/Star';
 
-type RepoInfoProps = {
+export type RepoInfoProps = {
+    /** The description of the repository. */
     description: string | null;
+    /** The name of the repository.  */
     name: string;
+    /** The number of stars received by the repository. */
     stars?: number;
 };
+/**
+ * Displays basic information about a Github repository.
+ */
 const RepoInfo: FC<RepoInfoProps> = ({ description, name, stars }) => {
     // Format the number of stars using the runtime locale
     const starsText =

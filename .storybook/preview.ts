@@ -4,9 +4,6 @@ export const parameters = {
       color: /(background|color)$/i,
       date: /Date$/,
     },
-    parameters: {
-      actions: { argTypesRegex: '^on.*' },
-    },
   },
   a11y: { disable: true },
 };
