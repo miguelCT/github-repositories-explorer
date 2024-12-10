@@ -3,12 +3,19 @@ import api from 'utils/api';
 import { USERS_QUERY_KEY } from 'utils/constants';
 
 const getUsers = async (searchText = '') => {
-    const response = await api.search.users({
-        per_page: 5,
-        q: searchText,
-    });
-
-    return response.data.items;
+    try {
+        const response = await api.search.users({
+            per_page: 5,
+            q: searchText,
+        });
+        return response.data.items;
+    } catch (error) {
+        // We rethrow the error so that the error is propagated to react-query
+        // and it can be handled by the error boundary
+        // eslint-disable-next-line no-console
+        console.error('Error fetching users:', error);
+        throw error;
+    }
 };
 export default function useFetchUsers(searchText: string) {
     return useQuery({
