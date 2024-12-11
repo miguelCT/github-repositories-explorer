@@ -15,5 +15,6 @@ export default defineConfig({
       },
     }),
   ],
+  base: "/github-repositories-explorer/",
   assetsInclude: ["/sb-preview/runtime.js"],
 });
