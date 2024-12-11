@@ -5,6 +5,7 @@ import ErrorAlert from 'components/ErrorAlert';
 import UserList from '../components/UserList';
 import UserSearch from '../components/UserSearch';
 import useFetchUsers from '../hooks/useFetchUsers';
+import UserRepos from './UserRepos';
 
 const Users: FC = () => {
     const { search, pathname } = useLocation();
@@ -57,7 +58,7 @@ const Users: FC = () => {
                 <ErrorAlert message={error.message} onRetry={refetch} />
             )}
             <p>{!isLoadingUsers && users?.length === 0 && 'No users found'}</p>
-            <UserList users={users ?? []} />
+            <UserList users={users ?? []} UserInnerInformation={UserRepos} />
         </>
     );
 };
