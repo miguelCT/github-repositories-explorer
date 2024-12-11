@@ -31,7 +31,9 @@ describe('fetchUserRepos', () => {
     it('returns an error if the fetch fails', async () => {
         const apiMock = vi.spyOn(api.repos, 'listForUser');
 
-        const consoleSpy = vi.spyOn(console, 'error');
+        const consoleSpy = vi
+            .spyOn(console, 'error')
+            .mockImplementationOnce(vi.fn());
         apiMock.mockRejectedValueOnce(new Error('Mocked error'));
 
         await expect(fetchUserRepos('username')).rejects.toThrowError();
