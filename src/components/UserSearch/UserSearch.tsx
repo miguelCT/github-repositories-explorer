@@ -1,11 +1,16 @@
 import { Box, Button, TextField } from '@mui/material';
 import { type FC } from 'react';
 
-type UserSearchProps = {
+export type UserSearchProps = {
+    /**  The current search input value. */
     inputSearch: string;
+    /** Callback function to handle search input changes. */
     onSearch: (searchText: string) => void;
 };
 
+/**
+ * A simple search bar to search for users.
+ */
 const UserSearch: FC<UserSearchProps> = ({ inputSearch, onSearch }) => {
     return (
         <Box
