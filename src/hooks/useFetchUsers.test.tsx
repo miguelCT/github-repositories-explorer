@@ -1,14 +1,11 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { renderHook, waitFor } from '@testing-library/react';
+import { type FC, type PropsWithChildren } from 'react';
 import { type UserSearchItem } from 'utils/types';
 import { describe, expect, it, vi } from 'vitest';
-import * as ReactQuery from 'react-query';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { type FC, type PropsWithChildren } from 'react';
-import { renderHook, waitFor } from '@testing-library/react';
 import api from '../utils/api';
 import { MAX_USERS_AMOUNT } from '../utils/constants';
 import useFetchUsers, { fetchUsers } from './useFetchUsers';
-
-// src/hooks/useFetchUsers.test.ts
 
 const userList: UserSearchItem[] = [
     {

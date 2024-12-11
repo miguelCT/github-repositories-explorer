@@ -53,6 +53,7 @@ const config = {
             "error",
             {
                 "devDependencies": [
+                    "**/*.spec.*",
                     "**/*.test.*",
                     "**/*.stories.*",
                     "**/.storybook/**/*.*"

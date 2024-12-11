@@ -1,6 +1,6 @@
 import { type Meta, type StoryObj } from '@storybook/react';
-import React, { type FormEvent, FormEventHandler, useState } from 'react';
 import { expect, fn, userEvent, within } from '@storybook/test';
+import { type FormEvent } from 'react';
 import UserSearch from './UserSearch';
 
 const meta: Meta<typeof UserSearch> = {

@@ -23,6 +23,7 @@ const RepoInfo: FC<RepoInfoProps> = ({ description, name, stars }) => {
             variant="outlined"
             sx={{
                 backgroundColor: theme => theme.palette.grey['300'],
+                height: '100%',
             }}
         >
             <CardHeader
@@ -36,7 +37,12 @@ const RepoInfo: FC<RepoInfoProps> = ({ description, name, stars }) => {
                             gap: 0.5,
                         }}
                     >
-                        <Typography variant="subtitle2">{starsText}</Typography>
+                        <Typography
+                            variant="subtitle2"
+                            data-testid={`${name}-stars`}
+                        >
+                            {starsText}
+                        </Typography>
                         <StarIcon fontSize="small" />
                     </Box>
                 }

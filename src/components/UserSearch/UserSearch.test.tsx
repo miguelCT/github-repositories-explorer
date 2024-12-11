@@ -1,15 +1,7 @@
-// src/components/UserSearch/UserSearch.test.tsx
-
-import {
-    render,
-    screen,
-    fireEvent,
-    waitFor,
-    cleanup,
-} from '@testing-library/react';
-import { it, describe, expect, afterEach, vi } from 'vitest';
 import { userEvent } from '@storybook/test';
+import { cleanup, render, screen } from '@testing-library/react';
 import { type FormEvent } from 'react';
+import { afterEach, describe, expect, it, vi } from 'vitest';
 import UserSearch from './UserSearch';
 
 const onSearch = vi.fn(() => {});

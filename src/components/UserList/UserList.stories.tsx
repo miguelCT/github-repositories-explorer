@@ -9,7 +9,6 @@ const meta: Meta<typeof UserList> = {
 export default meta;
 
 type Story = StoryObj<typeof UserList>;
-
 export const Default: Story = {
     args: {
         users: [

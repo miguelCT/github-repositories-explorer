@@ -2,7 +2,7 @@ import '@fontsource/roboto/300.css';
 import '@fontsource/roboto/400.css';
 import '@fontsource/roboto/500.css';
 import '@fontsource/roboto/700.css';
-import App from 'pages/App';
+import RepositoriesExplorer from 'pages/RepositoriesExplorer';
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
@@ -13,7 +13,7 @@ import Providers from 'Providers';
 ReactDOM.createRoot(document.getElementById('root')!).render(
     <React.StrictMode>
         <Providers>
-            <App />
+            <RepositoriesExplorer />
         </Providers>
     </React.StrictMode>,
 );
