@@ -6,5 +6,9 @@ type FullUserSearchItem =
 
 export type UserSearchItem = Pick<FullUserSearchItem, 'login' | 'id'>;
 
-export type UserRepo =
+type FullUserRepo =
     RestEndpointMethodTypes['repos']['listForUser']['response']['data'][0];
+export type UserRepo = Pick<
+    FullUserRepo,
+    'name' | 'id' | 'description' | 'stargazers_count'
+>;

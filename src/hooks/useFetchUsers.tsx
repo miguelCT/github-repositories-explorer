@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import api from 'utils/api';
-import { USERS_QUERY_KEY } from 'utils/constants';
+import api from '../utils/api';
+import { MAX_USERS_AMOUNT, USERS_QUERY_KEY } from '../utils/constants';
 
-const getUsers = async (searchText = '') => {
+export const fetchUsers = async (searchText = '') => {
     try {
         const response = await api.search.users({
-            per_page: 5,
+            per_page: MAX_USERS_AMOUNT,
             q: searchText,
         });
         return response.data.items;
@@ -20,7 +20,7 @@ const getUsers = async (searchText = '') => {
 export default function useFetchUsers(searchText: string) {
     return useQuery({
         queryKey: [USERS_QUERY_KEY, searchText],
-        queryFn: () => getUsers(searchText),
+        queryFn: () => fetchUsers(searchText),
         enabled: !!searchText,
     });
 }
