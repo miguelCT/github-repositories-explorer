@@ -20,7 +20,6 @@ test.describe('Repositories explorer page', () => {
         await page.getByPlaceholder('Enter username').fill('mui');
         await page.getByRole('button', { name: 'Search' }).click();
         await expect(page.getByText('Showing users for: "mui"')).toBeVisible();
-        test.setTimeout(10000);
         await expect(
             page.getByRole('button', { name: 'mui', exact: true }),
         ).toBeVisible();
