@@ -21,7 +21,6 @@ export const fetchUserRepos = async (userName: string): Promise<UserRepo[]> => {
 export default function useFetchUserRepos(userName: string) {
     return useQuery({
         queryKey: [USER_REPOS_QUERY_KEY, userName],
-
         queryFn: () => fetchUserRepos(userName),
     });
 }
