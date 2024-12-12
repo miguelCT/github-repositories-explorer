@@ -35,11 +35,12 @@ jobs:
       - name: Checkout Commit
         uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
       - name: Check types and lint code
         run: |
+          npm ci
           tsc
           npm run lint
   unit-test:
@@ -51,13 +52,14 @@ jobs:
       - name: Checkout Commit
         uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
       - name: Run test
-        run: |
-          npm run test:ci
-  build:
+        - run: npm ci
+        - run: npm run test:ci
+
+  build-and-deploy:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -67,12 +69,12 @@ jobs:
       - name: Checkout Commit
         uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
       - name: Run build
-        run: |
-          npm build
+        - run: npm ci
+        - run: npm build
 
       # Deploy to GH Pages
       - name: Setup Pages
