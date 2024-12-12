@@ -56,8 +56,9 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - name: Run test
-        - run: npm ci
-        - run: npm run test:ci
+        run: |
+          npm ci
+          npm run test:ci
 
   build-and-deploy:
     runs-on: ubuntu-latest
@@ -73,8 +74,9 @@ jobs:
         with:
           node-version: ${{ matrix.node }}
       - name: Run build
-        - run: npm ci
-        - run: npm build
+        run: | 
+          npm ci
+          npm build
 
       # Deploy to GH Pages
       - name: Setup Pages
