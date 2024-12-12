@@ -24,6 +24,10 @@ This project is a GitHub Repositories Explorer built using the following technol
 - **Vitest** + **testing-library**: For fast unit tests for Vitest + react applications. 
 - **Playwright** Test: Provides end-to-end testing capabilities for simulating user interactions. 
 
+### CI/CD:
+- **GitHub Actions**:
+  - e2e tests
+  - check, build and deploy to GitHub pages
 
 ## Run the project
 
