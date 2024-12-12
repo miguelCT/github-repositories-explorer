@@ -76,7 +76,7 @@ jobs:
       - name: Run build
         run: | 
           npm ci
-          npm build
+          npm run build
 
       # Deploy to GH Pages
       - name: Setup Pages
