@@ -41,7 +41,7 @@ Run `npm run test:e2e` to run the Playwright tests
 
 ## Demo
 
-<img src="https://github.com/miguelCT/my-workouts/blob/main/demo.gif" width="300" />
+<img src="https://github.com/miguelCT/github-repositories-explorer/blob/main/demo.gif" width="300" />
 
 ---
 ---
