@@ -1,0 +1,87 @@
+# Simple workflow for deploying static content to GitHub Pages
+name: Build and deploy
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ['main']
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets the GITHUB_TOKEN permissions to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow one concurrent deployment
+concurrency:
+  group: 'pages'
+  cancel-in-progress: true
+
+# In this workflow the type-check and unit-test jobs run in parallel 
+# The build job "needs" these 2 jobs to be successful to start.
+# If any of type-check or unit-test were to fail, the build job will not start and the
+# whole workflow will be marked as "failed".
+
+jobs:
+  type-check:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+      node: [20]
+    steps:
+      - name: Checkout Commit
+      uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node }}
+      - name: Check types and lint code
+      run: |
+        tsc
+        npm run lint
+  unit-test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+      node: [20]
+    steps:
+      - name: Checkout Commit
+      uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node }}
+      - name: Run test
+      run: |
+        npm run test:ci
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+      node: [20]
+    needs: [type-check, unit-test]
+    steps:
+      - name: Checkout Commit
+      uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node }}
+      - name: Run build
+      run: |
+        npm build
+
+      # Deploy to GH Pages
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Upload dist folder
+          path: './dist'
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
