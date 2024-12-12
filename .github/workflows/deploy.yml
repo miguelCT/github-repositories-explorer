@@ -30,49 +30,49 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-      node: [20]
+        node: [20]
     steps:
       - name: Checkout Commit
-      uses: actions/checkout@v2
+        uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
       - name: Check types and lint code
-      run: |
-        tsc
-        npm run lint
+        run: |
+          tsc
+          npm run lint
   unit-test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-      node: [20]
+        node: [20]
     steps:
       - name: Checkout Commit
-      uses: actions/checkout@v2
+        uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
       - name: Run test
-      run: |
-        npm run test:ci
+        run: |
+          npm run test:ci
   build:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-      node: [20]
+        node: [20]
     needs: [type-check, unit-test]
     steps:
       - name: Checkout Commit
-      uses: actions/checkout@v2
+        uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node }}
-      uses: actions/setup-node@v1
-      with:
-        node-version: ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node }}
       - name: Run build
-      run: |
-        npm build
+        run: |
+          npm build
 
       # Deploy to GH Pages
       - name: Setup Pages
