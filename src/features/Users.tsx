@@ -1,7 +1,7 @@
 import { LinearProgress } from '@mui/material';
+import ErrorAlert from 'components/ErrorAlert';
 import { type FC, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router';
-import ErrorAlert from 'components/ErrorAlert';
 import UserList from '../components/UserList';
 import UserSearch from '../components/UserSearch';
 import useFetchUsers from '../hooks/useFetchUsers';
@@ -13,7 +13,6 @@ const Users: FC = () => {
     const [searchText, setSearchText] = useState(
         searchParams.get('search') ?? '',
     );
-
     const [inputSearch, setInputSearch] = useState(searchText);
 
     const navigate = useNavigate();
@@ -30,10 +29,11 @@ const Users: FC = () => {
     const isLoadingUsers = isFetching || isLoading;
 
     const submitSearch = (event: React.FormEvent) => {
+        // Prevent the default form submission reloading the page
         event.preventDefault();
-        // TODO review if make this pure
+
         setSearchText(inputSearch);
-        event.preventDefault();
+        // Update the URL with the new search text or remove the search param if the input is empty
         if (inputSearch) {
             searchParams.set('search', inputSearch);
         } else {
