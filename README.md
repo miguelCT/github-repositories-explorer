@@ -12,17 +12,20 @@ This project is a GitHub Repositories Explorer built using the following technol
 - **@mui/material** & **@mui/icons-material**: Leverages Material UI components for a consistent and beautiful design following Google's Material Design guidelines. 
     
 ### Data Management:
-- **React Query**: Provides an easy and performant way to manage API calls and cached data within React components. 
+- **React Query**: Provides an easy and performant way to manage API calls and cached data within React components.
+- **octokit/rest**: GitHub REST API client for JavaScript
+
+### Routing
+- **React Router**: Handles client-side routing for the application, enabling navigation between different views. Used as a library due to simplicity.
 
 ### Development Tools:
 - **Vite**: Used as the build tool, offering a fast and efficient development experience with hot module replacement. 
 - **Storybook**: Facilitates the development and visualization of isolated UI components. 
-- **Playwright**: Enables end-to-end testing of your application. 
 - **ESLint + Prettier** & **Husky**: Enforce consistent coding style and run linting checks pre-commit for better code quality. 
 
 ### Testing:
 - **Vitest** + **testing-library**: For fast unit tests for Vitest + react applications. 
-- **Playwright** Test: Provides end-to-end testing capabilities for simulating user interactions. 
+- **Playwright** Provides end-to-end testing capabilities for simulating user interactions. 
 
 ### CI/CD:
 - **GitHub Actions**:
